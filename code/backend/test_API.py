@@ -11,8 +11,8 @@ class TestAPI(unittest.TestCase):
         self.app = app.test_client()
         self.app.testing = True
 
+    #cv test cleaning function
     def test_clean_cv_text(self):
-        """Test the CV text cleaning function"""
         raw_text = "This is\n\n\na test\n text  with   lots of \n\nspaces"
         expected = "This is a test text with lots of spaces"
         result = clean_cv_text(raw_text)
@@ -20,8 +20,9 @@ class TestAPI(unittest.TestCase):
 
     @patch('API.genai.Client')
     @patch('API.PdfReader')
+    
+    #test to see cv extraction works
     def test_CV_extractor_success(self, mock_pdf_reader, mock_client):
-        """Test successful CV extraction"""
         mock_page = MagicMock()
         mock_page.extract_text.return_value = "Test CV content"
         mock_pdf_reader.return_value.pages = [mock_page]
@@ -45,9 +46,9 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(data['analysed_text'], "Analyzed CV content")
         self.assertEqual(data['cleaned_text'], "Test CV content")
 
+    #test to see if interview question are generated correctly
     @patch('API.genai.Client')
     def test_interview_questions_success(self, mock_client):
-        """Test successful interview questions generation"""
         mock_response = MagicMock()
         mock_response.text = "Tell me about your experience with Python."
         mock_client.return_value.models.generate_content.return_value = mock_response
@@ -68,9 +69,9 @@ class TestAPI(unittest.TestCase):
         data = json.loads(response.data)
         self.assertEqual(data['question'], "Tell me about your experience with Python.")
 
+    #test to see if end interview summary works correctly
     @patch('API.genai.Client')
     def test_end_interview_success(self, mock_client):
-        """Test successful end interview endpoint"""
         mock_response = MagicMock()
         mock_response.text = "Interview Summary\n\nAdvantages\n\nYou demonstrated strong technical skills."
         mock_client.return_value.models.generate_content.return_value = mock_response
