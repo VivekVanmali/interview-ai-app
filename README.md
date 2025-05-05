@@ -15,3 +15,7 @@
 8. do "pip install --upgrade google-genai"
 9. do "pip install pypdf"
 10. run python API.py
+
+now open a new terminal
+1.direct to cd interview-ai-app\code\frontend\my-app
+2.run "npm install"
