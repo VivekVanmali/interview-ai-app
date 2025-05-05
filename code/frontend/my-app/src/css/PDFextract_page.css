@@ -1,0 +1,74 @@
+#pdf_extract_container{
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#cv_form{
+    display: flex;
+    justify-content: center;
+    
+    
+    flex-direction: column;
+    padding:0 20% 20% 20%;
+    background-color: #B8D6DB;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+#cv_form h2{
+    padding-top: 20%;
+    margin-bottom: 20%;
+    border-bottom: 1px solid black;
+}
+
+#cv_form select,#cv_form textarea{
+    border:none;
+    background-color: rgba(217,217,217);
+    padding:2%;
+    margin:2%;
+    border-radius: 5px;
+}
+
+#cv_form textarea{
+    height: 20vh;
+    resize: none;
+}
+
+#cv_form input{
+    padding:2%;
+    margin:2%;
+    border-radius: 5px;
+}
+
+#cv_form #submit{
+    background-color: rgb(55, 165, 33);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5% 2% 2% 0;
+    width: 25%;
+}
+
+
+#cv_form #submit:hover{
+    background-color: rgb(45, 145, 23);
+}
+
+#cv_form #error{
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+#cv_form #selecting_job , #cv_form #timer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+ 
+}
+

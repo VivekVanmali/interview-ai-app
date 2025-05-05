@@ -1,0 +1,38 @@
+/* Font from google fonts to access roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+#top_menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    width: 100vw;
+    border-bottom : 2px solid black;
+}
+
+#top_menu h1{
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    margin-left: 20px;
+    
+}
+
+#top_menu h1:hover{
+    cursor: pointer;
+    color: rgb(168, 163, 168);
+}
+
+#logout_btn{
+    margin-right:20px;
+    padding:10px;
+    border-radius: 20px;
+    background-color: rgb(168, 163, 168);
+}
+#logout_btn:hover{
+    margin-right:20px;
+    padding:11px;
+    size: 1.2em;
+    background-color: rgb(231, 172, 231);
+    cursor: pointer;
+}

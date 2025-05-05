@@ -1,0 +1,76 @@
+/* Font from google fonts to access roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+#top_menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    width: 100vw;
+    border-bottom : 2px solid black;
+}
+
+#logout_btn{
+    margin-right:20px;
+    padding:10px;
+    border-radius: 20px;
+    background-color: rgb(168, 163, 168);
+}
+#logout_btn:hover{
+    margin-right:20px;
+    padding:11px;
+    size: 1.2em;
+    background-color: rgb(168, 163, 168);
+    cursor: pointer;
+}
+
+
+
+#center_container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    width: 100%;
+}
+
+#center_frame{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width:75vw;
+    background-color: #B8D6DB;
+}
+
+#welcome_message{
+    font-weight: bold;
+    font-size: 2em;
+    padding-top:10vh;
+    font-family : 'Roboto', sans-serif;
+    height:35vh;
+    width:100%;
+}
+
+#interview_button{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 50vh;
+}
+
+#interview_button > button{
+    background-color: rgb(168, 163, 168);
+    border-radius: 50px;
+    padding: 20px;
+    margin:10% 0 10% 0;
+    font-size: 1.5em;
+}
+
+#interview_button > button:hover{
+    background-color: rgb(179, 231, 197);
+    font-size: 1.6em;
+    padding: 22px;
+}
+
+

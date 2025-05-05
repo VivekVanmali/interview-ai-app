@@ -1,0 +1,121 @@
+#interview_page #interview_h1 {
+    justify-self: center;
+    text-align: center;
+    border-bottom: black 1px solid;
+    width:75%;
+}
+#interview_page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#interview_container{
+    padding-top: 5%;
+    background-color: #B8D6DB;
+    width: 75%;
+    align-self:center;
+    justify-content: center;
+}
+#interview_content_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+#start_btn{
+    background-color: rgb(55, 165, 33);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5% 2% 2% 0;
+    width: 25%;
+}
+
+#interview_content_container #timer{
+
+    align-self: flex-end;
+    padding: 0.5%;
+    margin: 2% 5% 0 0;
+    border-radius: 10px;
+    border: solid 1px rgba(0, 0, 0, 0.514);
+    background-color: rgba(217,217,217);
+    font-weight:500;
+}
+
+#interview_content_container #prompt_area{
+    height: 50vh;
+    overflow-y: auto;
+    margin:2% 5% 2% 5%;
+    background-color: rgb(246, 243, 243);
+    resize:none;
+    width: 65vw;
+}
+
+#interview_content_container #interviewer , #interview_content_container #interviewee{  
+    margin:1% 1% 1% 1%;
+}
+
+#interview_container #answer_input{
+    height: 10vh;
+    width: 20vw;
+    overflow-y: auto;
+    resize: none;
+
+}
+
+#interview_container #answer_input_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+
+}
+
+
+
+#interview_container #submit_btn{
+    background-color: rgb(55, 165, 33);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5% 2% 2% 0;
+    width: 25%;
+    
+
+}
+#interview_container #button_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+#interview_container #record_btn, #interview_container #speak_btn, #interview_container #end_btn, #interview_container #home_btn{
+    background-color: rgba(217,217,217);
+    border : 1px solid black;
+    margin-top: 10%;
+    padding: 2%;
+    border-radius: 5px;
+}
+
+#interview_container #record_btn:hover, #interview_container #speak_btn:hover, #interview_container #end_btn:hover, #interview_container #home_btn:hover{
+    background-color: rgb(172, 169, 169);
+    cursor: pointer;
+
+}
+
+
+#interview_container #error{
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+ 

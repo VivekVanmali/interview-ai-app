@@ -1,0 +1,59 @@
+#display_container{
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 75vw;
+    background-color: #B8D6DB;
+    justify-self: center;
+
+}
+
+#display_container h1{
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    border-bottom: black 1px solid;
+    width: 75%;
+}
+
+#display_container .interviews{
+    background-color: aliceblue;
+    padding: 2%;
+    margin : 2%;
+    border-radius: 10px;
+    border : solid 1px rgba(0, 0, 0, 0.514);
+    width: 90%;
+    height: 6vh;
+}
+
+.delete_btn{
+    color : blue;
+    
+}
+
+.delete_btn:hover{
+    color : rgb(255, 12, 255);
+    cursor: pointer;
+}
+
+
+
+
+#display_container #interviews_container{
+    overflow-x: auto;
+    width:50%;
+}
+ 
+#display_container .interviews:hover{
+    background-color: rgb(168, 163, 168);
+    cursor: pointer;
+}
+
+#display_container #error{
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}

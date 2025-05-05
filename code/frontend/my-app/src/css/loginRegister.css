@@ -1,0 +1,61 @@
+#loginreg_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgba(123, 118, 118, 0.2);
+    backdrop-filter: blur(100px);
+}
+
+#loginreg_container label {
+    display:flex;
+    flex-direction: column;
+}
+
+#loginreg_container h2{
+    padding-top: 20%;
+    margin-bottom: 20%;
+    border-bottom: 1px solid black;
+
+}
+
+#loginreg_container input{
+    border:none;
+    background-color: rgba(217,217,217);
+    padding:2%;
+    margin:2%;
+    border-radius: 5px;}
+
+#loginreg_form {
+    padding:0 5% 5% 5%;
+    width: 25%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+#loginreg_form #submit{
+    background-color: rgb(55, 165, 33);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5% 2% 2% 0;
+}
+
+
+#loginreg_form #submit:hover{
+    background-color: rgb(45, 145, 23);
+}
+
+#loginreg_form #error{
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+#link_tag{
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
