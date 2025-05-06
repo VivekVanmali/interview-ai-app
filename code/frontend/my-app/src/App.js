@@ -1,5 +1,4 @@
 //HAD TO DOWNLOAD JSPDF
-//CHECK IF HAD TO DOWNLOAD WEBSPEECH FOR SPEECH RECOGNITION
 
 import React,{useState,useEffect} from 'react';
 import { Route, Routes, BrowserRouter,Navigate } from 'react-router-dom';
