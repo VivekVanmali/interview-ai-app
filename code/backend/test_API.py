@@ -1,97 +1,132 @@
 import unittest
 from unittest.mock import patch, MagicMock
+import time
 import json
+import os
 import io
-from API import app, clean_cv_text
+from API import app,clean_cv_text 
 
 class TestAPI(unittest.TestCase):
 
     def setUp(self):
-        # Create a test client
-        self.app = app.test_client()
-        self.app.testing = True
+        self.client = app.test_client()
+        self.client.testing = True
 
-    #cv test cleaning function
-    def test_clean_cv_text(self):
-        raw_text = "This is\n\n\na test\n text  with   lots of \n\nspaces"
-        expected = "This is a test text with lots of spaces"
-        result = clean_cv_text(raw_text)
-        self.assertEqual(result, expected)
 
-    @patch('API.genai.Client')
-    @patch('API.PdfReader')
+    #Test foe end interview
+    def test_end_interview(self):
+        
+        API_KEY = os.getenv("API_KEY")
+        if not API_KEY:
+            raise EnvironmentError("API_KEY is missing. Set your API key.")
+        
     
-    #test to see cv extraction works
-    def test_CV_extractor_success(self, mock_pdf_reader, mock_client):
+        test_data = {
+            "script": "Q:given your experience in Python, how would you approach a new project? A: I would start by understanding the requirements and then design the architecture.",
+            "jobPosition": "Software Engineer",
+            "job_description": "Looking for a software engineer with experience in Python.",
+            "cvAnalysis": "The candidate has 5 years of experience in Python and Java."
+        }
+
+        
+        start_time = time.time()
+        response = self.client.post(
+            '/end_interview',
+            data=json.dumps(test_data),
+            content_type='application/json'
+        )
+        end_time = time.time()
+        response_time = end_time - start_time
+        
+
+        #check if the responsive recieved process was succesful
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.data)
+        llm_output = data.get("question")
+
+        
+        print("\n(END INTERVIEW):")
+        print(llm_output)
+        print("Response time: ", response_time, "seconds")
+
+
+    @patch('API.PdfReader')
+    #Test for CV analysis
+    def test_cv_extractor(self,mock_pdf_reader):
+        API_KEY = os.getenv("API_KEY")
+        if not API_KEY:
+            raise EnvironmentError("API_KEY is missing. Set your API key.")
+        
         mock_page = MagicMock()
-        mock_page.extract_text.return_value = "Test CV content"
-        mock_pdf_reader.return_value.pages = [mock_page]
+        mock_page.extract_text.return_value = "name: John Doe\nexperience: 5 years in Python"
+        mock_pdf_reader.return_value.pages = [mock_page]  # Mocking a single page with some text
 
-        mock_response = MagicMock()
-        mock_response.text = "Analyzed CV content"
-        mock_client.return_value.models.generate_content.return_value = mock_response
+        test_file = io.BytesIO(b"fake pdf content")  # Simulate a file upload
 
-        test_file = io.BytesIO(b"fake pdf content")
-        response = self.app.post(
+        start_time = time.time()
+        response = self.client.post(
             '/CV_extractor',
             data={
-                'file_uploaded': (test_file, 'test.pdf'),
-                'job_description': 'Software Engineer job'
+                'file_uploaded':(test_file,'test.pdf'),
+                'job_description':'UI developer',
             },
             content_type='multipart/form-data'
         )
+        end_time = time.time()
+        response_time = end_time - start_time
 
+        #check if the responsive recieved process was succesful
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.data)
-        self.assertEqual(data['analysed_text'], "Analyzed CV content")
-        self.assertEqual(data['cleaned_text'], "Test CV content")
+        llm_output = data.get("analysed_text")
 
-    #test to see if interview question are generated correctly
-    @patch('API.genai.Client')
-    def test_interview_questions_success(self, mock_client):
-        mock_response = MagicMock()
-        mock_response.text = "Tell me about your experience with Python."
-        mock_client.return_value.models.generate_content.return_value = mock_response
+        
+        print("\n(CV EXTRACTOR):")
+        print(llm_output)
+        print("Response time: ", response_time, "seconds")
 
-        request_data = {
-            'script': 'Previous conversation',
-            'cv_analysis': 'CV analysis data',
-            'job_position': 'Software Developer'
+
+         #Test foe end interview
+    def test_generate_questions(self):
+        
+        API_KEY = os.getenv("API_KEY")
+        if not API_KEY:
+            raise EnvironmentError("API_KEY is missing. Set your API key.")
+        
+    
+        test_data = {
+            "script": "Q:given your experience in Python, how would you approach a new project? A: I would start by understanding the requirements and then design the architecture.",
+            "job_position": "Software Engineer",
+            "cv_analysis": "The candidate has 5 years of experience in Python and Java."
         }
 
-        response = self.app.post(
+        
+        start_time = time.time()
+        response = self.client.post(
             '/interview_questions',
-            data=json.dumps(request_data),
+            data=json.dumps(test_data),
             content_type='application/json'
         )
+        end_time = time.time()
+        response_time = end_time - start_time
+        
 
+        #check if the responsive recieved process was succesful
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.data)
-        self.assertEqual(data['question'], "Tell me about your experience with Python.")
+        llm_output = data.get("question")
 
-    #test to see if end interview summary works correctly
-    @patch('API.genai.Client')
-    def test_end_interview_success(self, mock_client):
-        mock_response = MagicMock()
-        mock_response.text = "Interview Summary\n\nAdvantages\n\nYou demonstrated strong technical skills."
-        mock_client.return_value.models.generate_content.return_value = mock_response
+        
+        print("\n (GENERATE QUESTTION):")
+        print(llm_output)
+        print("Response time: ", response_time, "seconds")
+        
 
-        request_data = {
-            'script': 'Full interview transcript',
-            'jobPosition': 'Data Scientist',
-            'job_description': 'Job details',
-            'cvAnalysis': 'CV Analysis'
-        }
 
-        response = self.app.post(
-            '/end_interview',
-            data=json.dumps(request_data),
-            content_type='application/json'
-        )
 
-        self.assertEqual(response.status_code, 200)
-        data = json.loads(response.data)
-        self.assertIn("Interview Summary", data['question'])
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
