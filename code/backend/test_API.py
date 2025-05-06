@@ -59,10 +59,11 @@ class TestAPI(unittest.TestCase):
         
         mock_page = MagicMock()
         mock_page.extract_text.return_value = "name: John Doe\nexperience: 5 years in Python"
-        mock_pdf_reader.return_value.pages = [mock_page]  # Mocking a single page with some text
+        #create a mock file of a single page only
+        mock_pdf_reader.return_value.pages = [mock_page]  
 
-        test_file = io.BytesIO(b"fake pdf content")  # Simulate a file upload
-
+        #mocks an upload
+        test_file = io.BytesIO(b"fake pdf content")  
         start_time = time.time()
         response = self.client.post(
             '/CV_extractor',
