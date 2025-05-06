@@ -87,6 +87,33 @@ class TestAPI(unittest.TestCase):
         print("Response time: ", response_time, "seconds")
 
 
+    def test_cv_extractor_no_file(self):
+        API_KEY = os.getenv("API_KEY")
+        if not API_KEY:
+            raise EnvironmentError("API_KEY is missing. Set your API key.")
+        
+       
+        #mocks an upload
+        test_file = io.BytesIO(b"fake pdf content")  
+        start_time = time.time()
+        response = self.client.post(
+            '/CV_extractor',
+            data={
+                'file_uploaded':(test_file,'test.pdf'),
+                'job_description':'UI developer',
+            },
+            content_type='multipart/form-data'
+        )
+        end_time = time.time()
+        response_time = end_time - start_time
+
+        #check if the responsive recieved process was succesful
+        self.assertEqual(response.status_code, 500)
+        data = json.loads(response.data)
+        llm_output = data.get("analysed_text")
+        print("\n(CV EXTRACTOR NO FILE):")
+        print("Response time: ", response_time, "seconds")
+
          #Test foe end interview
     def test_generate_questions(self):
         
