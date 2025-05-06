@@ -3,7 +3,7 @@ import { Link,useNavigate } from "react-router-dom";
 import '../css/reset.css';
 import '../css/loginRegister.css';
 import {auth} from "../firebase";
-import {signInWithEmailAndPassword,onAuthStateChanged} from "firebase/auth";
+import {signInWithEmailAndPassword} from "firebase/auth";
 
 
 // Login used firebase authentication to check if user is registered
